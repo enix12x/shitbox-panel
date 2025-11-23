@@ -1,0 +1,12 @@
+{
+  "name": "shitbox-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for shitbox message sender",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+
