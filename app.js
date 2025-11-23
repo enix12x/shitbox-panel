@@ -1,8 +1,7 @@
 let backendUrl = 'http://localhost:3000';
 let computers = [];
-let branding = 'Shitbox';
+let branding = 'Shitbox Panel';
 
-// Load frontend config
 async function loadFrontendConfig() {
   try {
     const response = await fetch('config.json');
@@ -14,12 +13,11 @@ async function loadFrontendConfig() {
     loadBackendConfig();
   } catch (error) {
     console.error('Error loading frontend config:', error);
-    // Try to load backend config anyway with default URL
     loadBackendConfig();
   }
 }
 
-// Load branding and computers from backend
+// get branding and computers from backend
 async function loadBackendConfig() {
   try {
     const response = await fetch(`${backendUrl}/api/config`);
@@ -30,11 +28,9 @@ async function loadBackendConfig() {
     branding = data.branding;
     computers = data.computers;
     
-    // Update branding
     document.getElementById('branding').textContent = branding;
     document.title = branding;
     
-    // Populate computer select
     const select = document.getElementById('computerSelect');
     select.innerHTML = '<option value="">Select a computer...</option>';
     computers.forEach(comp => {
@@ -49,10 +45,8 @@ async function loadBackendConfig() {
   }
 }
 
-// Start loading config when page loads
 loadFrontendConfig();
 
-// Handle form submission
 document.getElementById('messageForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   
@@ -65,7 +59,6 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     return;
   }
   
-  // Disable button and show loading state
   sendButton.disabled = true;
   sendButton.textContent = 'Sending...';
   
@@ -84,7 +77,7 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Failed to send message');
     }
     
-    // Success
+
     showAlert(data.message || 'Message sent!', 'success');
     document.getElementById('messageInput').value = '';
     
@@ -92,13 +85,11 @@ document.getElementById('messageForm').addEventListener('submit', async (e) => {
     console.error('Error sending message:', error);
     showAlert(error.message || 'Error sending message', 'danger');
   } finally {
-    // Re-enable button
     sendButton.disabled = false;
     sendButton.textContent = 'Send';
   }
 });
 
-// Show alert message
 function showAlert(message, type) {
   const container = document.getElementById('alertContainer');
   const alert = document.createElement('div');
@@ -110,7 +101,6 @@ function showAlert(message, type) {
   container.innerHTML = '';
   container.appendChild(alert);
   
-  // Auto-dismiss after 3 seconds for success messages
   if (type === 'success') {
     setTimeout(() => {
       const bsAlert = new bootstrap.Alert(alert);
