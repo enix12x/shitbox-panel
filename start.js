@@ -2,7 +2,6 @@ const httpServer = require('http-server');
 const fs = require('fs');
 const path = require('path');
 
-// Load config
 let config;
 try {
   const configData = fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8');
