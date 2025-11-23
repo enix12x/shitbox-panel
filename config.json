@@ -1,7 +1,5 @@
 {
-  // Backend server URL
   "backendUrl": "http://localhost:3000",
-  // Port the frontend server runs on
   "port": 8080
 }
 
